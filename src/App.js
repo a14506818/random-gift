@@ -34,6 +34,10 @@ function App() {
       alert("No more user!!");
       return;
     }
+    if (users.map((user) => user.email).includes(email)) {
+      alert("This Email have Inserted!!");
+      return;
+    }
 
     const imgRef = ref(storage, `images/${v4()}`);
     uploadBytes(imgRef, imgFile).then((snapshot) => {
@@ -57,7 +61,11 @@ function App() {
     });
   };
 
-  const randomGifts = () => {
+  const delay = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
+  const randomGifts = async () => {
     if (users.length != maxUsers) {
       alert("Wait for all Users to upload!!");
       return;
@@ -73,7 +81,7 @@ function App() {
     });
     console.log(URLList);
 
-    users.forEach((user) => {
+    for (const user of users) {
       const sendListRef = DBref(database, "sendList/");
       const newSendListRef = push(sendListRef);
       var randomIndex = 0;
@@ -84,14 +92,15 @@ function App() {
       }
       URLList.splice(randomIndex, 1);
 
-      set(newSendListRef, {
+      await set(newSendListRef, {
         email: user.email,
         sendURL: randomURL,
       });
 
-      sendEmail(user.email, randomURL);
-    });
-    alert("Email sended successfully!");
+      await sendEmail(user.email, randomURL);
+      await delay(100);
+    }
+    await alert("Email sended successfully!");
   };
 
   const sendEmail = (toMail, URL) => {
