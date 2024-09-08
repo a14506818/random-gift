@@ -161,7 +161,6 @@ function App() {
       alignItems="center"
       justifyContent="space-between"
       flexDirection="column"
-      maxWidth="1000px"
       minHeight="100vh"
     >
       <Heading size="xl">Farm73 最大的聖誕交換禮物抽獎平台 上線咯！</Heading>
