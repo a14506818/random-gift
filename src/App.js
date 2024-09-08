@@ -11,6 +11,7 @@ import {
 import { ref as DBref, set, push, onValue, remove } from "firebase/database";
 import { v4 } from "uuid";
 import emailjs from "emailjs-com";
+import { Button, Input, Heading, Box } from "@chakra-ui/react";
 
 function App() {
   const [email, setEmail] = useState("");
@@ -57,10 +58,10 @@ function App() {
   };
 
   const randomGifts = () => {
-    // if (users.length != maxUsers) {
-    //   alert("Wait for all Users to upload!!");
-    //   return;
-    // }
+    if (users.length != maxUsers) {
+      alert("Wait for all Users to upload!!");
+      return;
+    }
 
     // delete old data
     const deleteRef = DBref(database, "sendList/");
@@ -152,33 +153,56 @@ function App() {
   }, [users]);
 
   return (
-    <div className="App">
-      <h1>2024 Farm73 最大的聖誕交換禮物抽獎平台 上線咯！</h1>
-      <form onSubmit={uploadData}>
-        <h4>Email:</h4>
-        <input
-          type="email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        ></input>
-        <h4>Image:</h4>
-        <input
-          type="file"
-          onChange={(e) => {
-            setImgFile(e.target.files[0]);
-          }}
-        ></input>
-        <h4>Upload to DB:</h4>
-        <button type="submit">Submit</button>
-      </form>
-      <h4>
+    <Box
+      className="App"
+      color="#7e121d"
+      bg="#e6dcb1"
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
+      flexDirection="column"
+      maxWidth="1000px"
+      minHeight="100vh"
+    >
+      <Heading size="xl">Farm73 最大的聖誕交換禮物抽獎平台 上線咯！</Heading>
+      <Heading size="md">Email:</Heading>
+      <Input
+        type="email"
+        onChange={(e) => {
+          setEmail(e.target.value);
+        }}
+        maxWidth="400px"
+        variant="filled"
+      ></Input>
+      <Heading size="md">Image:</Heading>
+      <Input
+        type="file"
+        onChange={(e) => {
+          setImgFile(e.target.files[0]);
+        }}
+        maxWidth="400px"
+        variant="filled"
+      ></Input>
+      <Heading size="md">Upload to DB:</Heading>
+      <Button colorScheme="green" onClick={uploadData}>
+        Submit
+      </Button>
+      <Heading size="md">
         Uploaded Users ({users.length} / {maxUsers})
-      </h4>
-      <button onClick={randomGifts}>Run Random Gifts & Send Email</button>
+      </Heading>
+      <Box>
+        {users.map((user, index) => (
+          <p key={index}>{user.email}</p>
+        ))}
+      </Box>
+      <Button colorScheme="green" onClick={randomGifts}>
+        Run Random Gifts & Send Email
+      </Button>
       <br></br>
-      <button onClick={resetAllData}>Reset</button>
-    </div>
+      <Button colorScheme="green" onClick={resetAllData}>
+        Reset
+      </Button>
+    </Box>
   );
 }
 
