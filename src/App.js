@@ -21,6 +21,8 @@ function App() {
 
   const uploadData = (e) => {
     e.preventDefault();
+    const confirm = window.confirm("Are you sure you want to Upload data?");
+    if (!confirm) return;
 
     if (email == "") {
       alert("Enter your Email!!");
@@ -66,6 +68,9 @@ function App() {
   };
 
   const randomGifts = async () => {
+    const confirm = window.confirm("Are you sure you want to Send Email?");
+    if (!confirm) return;
+
     if (users.length != maxUsers) {
       alert("Wait for all Users to upload!!");
       return;
@@ -127,6 +132,9 @@ function App() {
   };
 
   const resetAllData = () => {
+    const confirm = window.confirm("Are you sure you want to Reset all data?");
+    if (!confirm) return;
+
     const deleteRef = DBref(database, "sendList/");
     remove(deleteRef).then(() => {
       const usersRef = DBref(database, "users/");
