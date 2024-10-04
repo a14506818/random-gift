@@ -4,6 +4,8 @@
 
 此專案是一個使用 React 建立的網頁應用程式，讓用戶參與聖誕交換禮物活動。每位用戶可以上傳他們想要收到的禮物圖片，並在提交完成後隨機分配一個其他用戶的禮物圖片。收到隨機禮物圖片的用戶必須準備這個禮物並送給對應的參與者。
 
+👉 [立即體驗平台](https://random-gift-4d304.web.app)
+
 ## 🚀 功能特色
 
 - **禮物圖片上傳:** 用戶可以上傳他們想收到的禮物圖片。
@@ -46,6 +48,8 @@
 # 🎄 Farm73 Christmas Gift Exchange Platform
 
 This project is a React web application that allows users to participate in a Christmas gift exchange. Each user uploads an image of the gift they would like to receive, and after the submissions are complete, users are randomly assigned another user's desired gift. Once assigned, each user needs to prepare the gift shown in the randomly assigned image for the recipient.
+
+👉 [Try it here](https://random-gift-4d304.web.app)
 
 ## 🚀 Features
 
