@@ -11,7 +11,18 @@ import {
 import { ref as DBref, set, push, onValue, remove } from "firebase/database";
 import { v4 } from "uuid";
 import emailjs from "emailjs-com";
-import { Button, Input, Heading, Box } from "@chakra-ui/react";
+import { FaGift, FaUpload, FaRedo } from "react-icons/fa";
+import {
+  Box,
+  Flex,
+  Heading,
+  Input,
+  Button,
+  Text,
+  useToast,
+  Progress,
+  VStack,
+} from "@chakra-ui/react";
 
 function App() {
   const [email, setEmail] = useState("");
@@ -170,55 +181,107 @@ function App() {
   }, [users]);
 
   return (
-    <Box
-      className="App"
-      color="#7e121d"
-      bg="#e6dcb1"
-      display="flex"
-      alignItems="center"
-      justifyContent="space-between"
-      flexDirection="column"
+    <Flex
+      direction="column"
+      align="center"
+      justify="center"
       minHeight="100vh"
+      bgGradient="linear(to-b, red.200, green.200, yellow.100)"
+      padding={5}
     >
-      <Heading size="xl">Farm73 最大的聖誕交換禮物抽獎平台 上線咯！</Heading>
-      <Heading size="md">Email:</Heading>
-      <Input
-        type="email"
-        onChange={(e) => {
-          setEmail(e.target.value);
-        }}
-        maxWidth="400px"
-        variant="filled"
-      ></Input>
-      <Heading size="md">Image:</Heading>
-      <Input
-        type="file"
-        onChange={(e) => {
-          setImgFile(e.target.files[0]);
-        }}
-        maxWidth="400px"
-        variant="filled"
-      ></Input>
-      <Heading size="md">Upload to DB:</Heading>
-      <Button colorScheme="green" onClick={uploadData}>
-        Submit
-      </Button>
-      <Heading size="md">
-        Uploaded Users ({users.length} / {maxUsers})
-      </Heading>
-      <Box>
-        {users.map((user, index) => (
-          <p key={index}>{user.email}</p>
-        ))}
+      <Box
+        maxHeight="1000px"
+        display="flex"
+        justifyContent="space-between"
+        flexDirection="column"
+        alignItems="center"
+      >
+        <Heading
+          as="h1"
+          size="2xl"
+          color="red.700"
+          mb={8}
+          fontWeight="bold"
+          textAlign="center"
+        >
+          Christmas Gifts Exchange Platform
+        </Heading>
+        <VStack spacing={5} width="full" maxWidth="400px">
+          <Box width="full">
+            <Text fontSize="lg" color="green.700" mb={2}>
+              Email:
+            </Text>
+            <Input
+              placeholder="Enter your email"
+              size="lg"
+              variant="filled"
+              type="email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </Box>
+          <Box width="full">
+            <Text fontSize="lg" color="green.700" mb={2}>
+              Image:
+            </Text>
+            <Input
+              type="file"
+              size="lg"
+              variant="filled"
+              onChange={(e) => {
+                setImgFile(e.target.files[0]);
+              }}
+            />
+          </Box>
+          <Button
+            leftIcon={<FaUpload />}
+            colorScheme="green"
+            size="lg"
+            width="full"
+            onClick={uploadData}
+          >
+            Upload to DB
+          </Button>
+
+          <Heading size="md">
+            Uploaded Users ({users.length} / {maxUsers})
+          </Heading>
+
+          <Box>
+            {users.map((user, index) => (
+              <p key={index}>{user.email}</p>
+            ))}
+          </Box>
+          <Progress
+            value={(users.length / maxUsers) * 100}
+            size="md"
+            colorScheme="green"
+            width="full"
+          />
+          <Button
+            leftIcon={<FaGift />}
+            colorScheme="teal"
+            size="lg"
+            width="full"
+            onClick={randomGifts}
+          >
+            Run Random Gifts & Send Email
+          </Button>
+
+          <br></br>
+          <Button
+            leftIcon={<FaRedo />}
+            colorScheme="red"
+            size="lg"
+            width="full"
+            onClick={resetAllData}
+          >
+            Reset
+          </Button>
+        </VStack>
       </Box>
-      <Button colorScheme="green" onClick={randomGifts}>
-        Run Random Gifts & Send Email
-      </Button>
-      <br></br>
-      <Button colorScheme="green" onClick={resetAllData}>
-        Reset
-      </Button>
-    </Box>
+    </Flex>
   );
 }
 

@@ -27,17 +27,21 @@
 ### 用戶流程：
 
 1. **禮物圖片上傳:**
+
    - 用戶輸入 Email 並上傳他們想要收到的禮物圖片。
    - 應用會將圖片儲存在 Firebase Storage，並將用戶的 Email 和圖片 URL 儲存在 Firebase Realtime Database 中。
 
 2. **隨機禮物分配:**
+
    - 當所有用戶上傳完畢後，應用會隨機為每個用戶分配另一個用戶的禮物圖片。
    - 每個用戶都不會收到自己的圖片。
 
 3. **禮物準備:**
+
    - 隨機分配後，每位用戶必須準備他們收到的禮物圖片中的禮物，並為另一位參與者準備該禮物。
 
 4. **Email 發送:**
+
    - 應用會透過 EmailJS 發送包含分配給用戶的禮物圖片 URL 的 Email，讓用戶可以準備該禮物。
 
 5. **數據重置:**
@@ -72,17 +76,19 @@ This project is a React web application that allows users to participate in a Ch
 ### User Flow:
 
 1. **Gift Image Upload:**
+
    - Users provide their email and upload an image of the gift they want to receive.
    - The app stores the image in Firebase Storage and saves the user’s email and the image URL in Firebase Realtime Database.
 
 2. **Random Gift Assignment:**
+
    - Once all users have uploaded their desired gift images, the app will assign each user a random gift image from another user.
    - Users will never receive their own image.
 
 3. **Gift Preparation:**
    - After the random assignment, each user is responsible for preparing the gift shown in the image they received for another participant.
-   
 4. **Sending Emails:**
+
    - An email containing the assigned gift image URL is sent to each user using EmailJS so they can prepare that specific gift for the other participant.
 
 5. **Resetting Data:**
