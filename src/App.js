@@ -28,7 +28,7 @@ function App() {
   const [email, setEmail] = useState("");
   const [imgFile, setImgFile] = useState(null);
   const [users, setUsers] = useState([]);
-  const maxUsers = 8;
+  const maxUsers = 7;
 
   const uploadData = (e) => {
     e.preventDefault();
