@@ -114,7 +114,7 @@ function App() {
       });
 
       await sendEmail(user.email, randomURL);
-      await delay(100);
+      await delay(1000);
     }
     await alert("Email sended successfully!");
   };
